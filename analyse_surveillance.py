@@ -5,7 +5,7 @@ from datetime import datetime
 import time
 from sauvegarde import rotate_log, backup_files  # Importer les fonctions spécifiques
 from gestionnaire_mdp import add_password, retrieve_password, load_key
-
+import subprocess
 
 # =======================================================
 # Configuration des fichiers
@@ -168,5 +168,56 @@ def main():
 
 
 
+
+
+# Fonction pour scanner les ports d'une cible
+def scan_ports(target_ip):
+    try:
+        print(f"Scanning ports on {target_ip}...")
+        # Exécution du script bash
+        result = subprocess.run(
+            ["bash", "/home/sylvie/Projet_scripting_securise/scan_ports.sh", target_ip],
+            check=True, capture_output=True, text=True
+        )
+        return result.stdout  # Retourne la sortie du scan
+    except subprocess.CalledProcessError as e:
+        print(f"Erreur lors du scan des ports: {e}")
+        return None
+
+# Fonction pour analyser les résultats du scan
+def analyze_scan_results(scan_file):
+    try:
+        # Exécuter analyze_scan_results.py
+        result = subprocess.run(
+            ['python3', './analyze_scan_results.py', scan_file],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
+        )
+        
+        if result.returncode == 0:
+            print("Analyse des résultats du scan réussie.")
+            print(result.stdout)
+        else:
+            print(f"Erreur lors de l'analyse des résultats : {result.stderr}")
+    except Exception as e:
+        print(f"Erreur : {e}")
+
+# Fonction principale qui exécute les étapes
+def main():
+    target_ip = "192.168.1.115"  # Remplace par l'adresse IP cible
+    
+    # Scanner les ports
+    scan_results = scan_ports(target_ip)
+    
+    if scan_results:
+        # Sauvegarder les résultats dans un fichier pour analyse
+        with open("nmap_scan_results.txt", "w") as f:
+            f.write(scan_results)
+        
+        # Analyser les résultats du scan
+        analyze_scan_results("nmap_scan_results.txt")
+    else:
+        print("Aucun résultat de scan n'a été généré.")
+
 if __name__ == "__main__":
     main()
+
