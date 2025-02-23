@@ -7,12 +7,29 @@ from sauvegarde import rotate_log, backup_files  # Importer les fonctions spéci
 from gestionnaire_mdp import add_password, retrieve_password, load_key
 import subprocess
 
+from gestion_utilisateur.gestion_mdp import check_password_complexity, generate_password_report, force_password_change
+
+
 # =======================================================
 # Configuration des fichiers
 # =======================================================
 LOG_FILE = "/home/sylvie/Projet_scripting_securise/hash_changes.log"
 JSON_FILE = "/home/sylvie/Projet_scripting_securise/alerts.json"
 SQLITE_DB = "/var/log/alerts.db"
+
+
+
+# Exemple d'appel des fonctions importées
+username = "testuser"
+password = "Test@1234"
+
+# Vérifier la complexité du mot de passe
+generate_password_report(username, password)
+
+# Si le mot de passe n'est pas conforme, forcer le changement
+if not check_password_complexity(password)[0]:
+    force_password_change(username)
+
 
 
 def initialize_files():
@@ -217,6 +234,26 @@ def main():
         analyze_scan_results("nmap_scan_results.txt")
     else:
         print("Aucun résultat de scan n'a été généré.")
+
+
+# Fonction pour exécuter le script bash
+def run_bash_script(script_path):
+    try:
+        result = subprocess.run([script_path], check=True, text=True, capture_output=True)
+        print(result.stdout)  # Affiche le résultat de l'exécution du script
+    except subprocess.CalledProcessError as e:
+        print(f"Erreur lors de l'exécution du script: {e}")
+
+
+resultat_mdp = check_password_complexity("mon_parametre")
+print("Résultat de gestion_mdp.py:", resultat_mdp)
+
+
+# Exécuter le script gestion_utilisateur.sh
+script_path = "./gestion_utilisateur/gestion_utilisateur.sh"
+run_bash_script(script_path)
+
+
 
 if __name__ == "__main__":
     main()
