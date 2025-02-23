@@ -7,6 +7,8 @@ HASH_FILE="/home/sylvie/Projet_scripting_securise/file_hashes.log"  # Mettez à 
 CHANGE_LOG="/home/sylvie/Projet_scripting_securise/hash_changes.log"  # Mettez à jour ce chemin pour correspondre au fichier log Python.
 HASH_CMD="sha256sum"
 INOTIFY_EVENTS="modify,create,delete,move"
+LOG_FILE="/home/sylvie/Projet_scripting_securise/logs/auth.log"
+FAILED_LOGINS="/home/sylvie/Projet_scripting_securise/logs/failed_logins.log"
 
 
 source /home/sylvie/Projet_scripting_securise/.env  # Remplacez par le chemin correct si nécessaire
