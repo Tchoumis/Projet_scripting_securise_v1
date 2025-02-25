@@ -1,6 +1,7 @@
 import re
 import os
-import yagmail
+import smtplib
+from email.mime.text import MIMEText
 from collections import defaultdict
 from datetime import datetime
 
@@ -13,11 +14,25 @@ EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')  # Récupérer le mot de passe emai
 # Expression régulière pour détecter les échecs de connexion
 failed_login_pattern = r"Failed password for .* from (\S+)"
 
-# Fonction pour envoyer une alerte par email
+# Fonction pour envoyer une alerte par email avec smtplib
 def send_alert(subject, body):
     try:
-        yag = yagmail.SMTP(user=ALERT_EMAIL, password=EMAIL_PASSWORD)
-        yag.send(to=ALERT_EMAIL, subject=subject, contents=body)
+        # Paramètres de connexion pour Gmail
+        user = ALERT_EMAIL
+        password = EMAIL_PASSWORD  # Mot de passe d'application Gmail
+        
+        # Préparation du message
+        msg = MIMEText(body)
+        msg['Subject'] = subject
+        msg['From'] = user
+        msg['To'] = user
+
+        # Connexion au serveur SMTP de Gmail
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()  # Démarrer le chiffrement TLS
+        server.login(user, password)
+        server.sendmail(user, user, msg.as_string())
+        server.quit()
         print(f"Alert sent to {ALERT_EMAIL}")
     except Exception as e:
         print(f"Error sending alert: {e}")

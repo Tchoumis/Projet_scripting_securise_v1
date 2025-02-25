@@ -1,0 +1,3 @@
+2025-02-25 02:00:01 - Démarrage de la surveillance des fichiers sensibles : /etc/passwd /etc/shadow /etc/ssh/sshd_config
+Setting up watches.
+Watches established.

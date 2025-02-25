@@ -2,6 +2,7 @@
 import os
 import json
 from cryptography.fernet import Fernet
+
 import argparse
 
 # Fichiers de stockage
@@ -85,3 +86,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -19,6 +19,7 @@ SQLITE_DB = "/var/log/alerts.db"
 
 
 
+
 # Exemple d'appel des fonctions importées
 username = "testuser"
 password = "Test@1234"
@@ -29,6 +30,22 @@ generate_password_report(username, password)
 # Si le mot de passe n'est pas conforme, forcer le changement
 if not check_password_complexity(password)[0]:
     force_password_change(username)
+
+
+# analyse-surveillance.py
+from gestionnaire_mdp import add_password, retrieve_password, load_key
+
+# Exemple d'utilisation
+key = load_key()
+
+# Ajouter un mot de passe
+add_password('service', 'username', 'password', key)
+
+# Récupérer un mot de passe
+creds = retrieve_password('service', key)
+if creds:
+    print(creds)
+
 
 
 
@@ -257,4 +274,3 @@ run_bash_script(script_path)
 
 if __name__ == "__main__":
     main()
-
