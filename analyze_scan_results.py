@@ -20,7 +20,7 @@ def analyze_scan_results(scan_file):
     print(data)
     
     # Recherche des services et versions trouvées par NMAP
-    services = re.findall(r'(\d+/tcp)\s+open\s+([a-zA-Z0-9\-]+)\s+(\d+\.\d+\.\d+\.\d+)', data)
+    services = re.findall(r'(\d+/tcp)\s+open\s+([a-zA-Z0-9\-]+)\s+([0-9.]+)', data)
     services_no_version = re.findall(r'(\d+/tcp)\s+open\s+([a-zA-Z0-9\-]+)', data)  # Services sans version
     
     vulnerable_services = []

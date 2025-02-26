@@ -1,0 +1,17 @@
+# Ignorer les fichiers Python compilés
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignorer les fichiers de sauvegarde
+*.bak
+backups/
+
+# Ignorer les fichiers de logs
+*.log
+
+# Ignorer les fichiers sensibles
+passwords.enc
+
+# Ignorer le répertoire pycache dans gestion_utilisateur (redondant mais explicite)
+gestion_utilisateur/__pycache__/
