@@ -172,19 +172,19 @@ def main():
     store_events_json(events)
     store_events_sql(events)
 
-# Vous pouvez appeler les fonctions de sauvegarde dans le script principal selon vos besoins
+# appeler les fonctions de sauvegarde dans le script principal selon vos besoins
 def main():
     # Exemple de surveillance de fichiers
     print("Démarrage de la surveillance des fichiers...")
     # Par exemple, vérifier la rotation des logs tous les 10 minutes
     while True:
-        # Rotation des logs
+       
         rotate_log()
 
-        # Sauvegarde des fichiers
+        
         backup_files()
 
-        # Attendre avant de vérifier à nouveau
+       
         time.sleep(600)  # Par exemple, toutes les 10 minutes
 
 def main():
@@ -237,7 +237,7 @@ def analyze_scan_results(scan_file):
 
 # Fonction principale qui exécute les étapes
 def main():
-    target_ip = "192.168.1.115"  # Remplace par l'adresse IP cible
+    target_ip = "192.168.1.152"  
     
     # Scanner les ports
     scan_results = scan_ports(target_ip)

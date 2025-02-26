@@ -7,8 +7,7 @@ __pycache__/
 *.bak
 backups/
 
-# Ignorer les fichiers de logs
-*.log
+
 
 # Ignorer les fichiers sensibles
 passwords.enc
