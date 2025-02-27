@@ -6,9 +6,9 @@ from datetime import datetime
 # =======================================================
 # Configuration des fichiers
 # =======================================================
-LOG_FILE = "/home/sylvie/Projet_scripting_securise/hash_changes.log"  # Fichier de log à surveiller
-BACKUP_DIR = "/home/sylvie/Projet_scripting_securise/backups/"  # Dossier de sauvegarde
-MAX_LOG_SIZE = 10 * 1024 * 1024  # Taille limite du fichier de log en octets (10 Mo)
+LOG_FILE = "/home/sylvie/Projet_scripting_securise/hash_changes.log"
+BACKUP_DIR = "/home/sylvie/Projet_scripting_securise/backups/"
+MAX_LOG_SIZE = 10 * 1024 * 1024
 DATE_FORMAT = "%Y%m%d_%H%M%S"
 
 # Créer les répertoires nécessaires si ils n'existent pas
@@ -41,7 +41,7 @@ def backup_files():
     Effectue une sauvegarde des fichiers importants.
     """
     files_to_backup = [
-        "/etc/passwd", "/etc/shadow", "/etc/ssh/sshd_config",  # Ajouter d'autres fichiers à sauvegarder
+        "/etc/passwd", "/etc/shadow", "/etc/ssh/sshd_config",
     ]
     
     for file in files_to_backup:

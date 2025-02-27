@@ -3,15 +3,15 @@
 # ===============================================
 # Configuration
 FILES="/etc/passwd /etc/shadow /etc/ssh/sshd_config"
-HASH_FILE="/home/sylvie/Projet_scripting_securise/file_hashes.log"  # Mettez à jour ce chemin si vous voulez utiliser un chemin relatif ou spécifique.
-CHANGE_LOG="/home/sylvie/Projet_scripting_securise/hash_changes.log"  # Mettez à jour ce chemin pour correspondre au fichier log Python.
+HASH_FILE="/home/sylvie/Projet_scripting_securise/file_hashes.log" 
+CHANGE_LOG="/home/sylvie/Projet_scripting_securise/hash_changes.log"
 HASH_CMD="sha256sum"
 INOTIFY_EVENTS="modify,create,delete,move"
 LOG_FILE="/home/sylvie/Projet_scripting_securise/logs/auth.log"
 FAILED_LOGINS="/home/sylvie/Projet_scripting_securise/logs/failed_logins.log"
 
 
-source /home/sylvie/Projet_scripting_securise/.env  # Remplacez par le chemin correct si nécessaire
+source /home/sylvie/Projet_scripting_securise/.env  # Remplacez par le chemin correct
 
 # ===============================================
 # Vérification des commandes requises
@@ -59,7 +59,6 @@ yag.send(to='sylviekelkeu@gmail.com', subject='$subject', contents='$body')
         log_message "Erreur lors de l'envoi de l'email."
     fi
 }
-
 
 # Initialise le fichier de hachages en calculant l'empreinte de chaque fichier.
 initialize_hashes() {

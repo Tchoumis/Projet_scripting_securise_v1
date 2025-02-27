@@ -1,16 +1,16 @@
 import sys
 import re
 
-# Base de données de vulnérabilités (exemple, à remplacer par une vraie base ou une API)
+# Base de données de vulnérabilités
 VULNERABLE_SERVICES = {
-    'vsftpd': ['3.0.5'],  # version vulnérable
-    'openssh': ['9.9p1'],  # version vulnérable
-    'apache': ['2.4.1', '2.4.2'],  # exemple d'ajout d'un autre service
-    'ftp': [],  # Le service FTP est vulnérable indépendamment de la version
-    'ssh': []  # Le service SSH est vulnérable indépendamment de la version
+    'vsftpd': ['3.0.5'],
+    'openssh': ['9.9p1'],
+    'apache': ['2.4.1', '2.4.2'],
+    'ftp': [],
+    'ssh': []
 }
 
-# Fonction pour analyser les résultats du scan NMAP
+# Fonction pour analyser les résultats du scan nmap
 def analyze_scan_results(scan_file):
     with open(scan_file, 'r') as file:
         data = file.read()
@@ -19,9 +19,9 @@ def analyze_scan_results(scan_file):
     print("Contenu du fichier :")
     print(data)
     
-    # Recherche des services et versions trouvées par NMAP
+    # Recherche des services et versions trouvées par nmap
     services = re.findall(r'(\d+/tcp)\s+open\s+([a-zA-Z0-9\-]+)\s+([0-9.]+)', data)
-    services_no_version = re.findall(r'(\d+/tcp)\s+open\s+([a-zA-Z0-9\-]+)', data)  # Services sans version
+    services_no_version = re.findall(r'(\d+/tcp)\s+open\s+([a-zA-Z0-9\-]+)', data)
     
     vulnerable_services = []
 
@@ -51,14 +51,14 @@ def analyze_scan_results(scan_file):
     else:
         print("Aucune vulnérabilité détectée.")
 
-# Fonction pour envoyer une alerte (par email ou log, à ajuster selon votre configuration)
+# Fonction pour envoyer une alerte
 def send_alert(vulnerable_services):
     print("\nAlerte : Des services vulnérables ont été trouvés !")
     for service in vulnerable_services:
         print(f"- {service}")
-    # Exemple d'alerte (envoi d'email ou log peut être ajouté ici)
+
 
 # Si le script est exécuté directement
 if __name__ == "__main__":
-    scan_file = "/home/sylvie/Projet_scripting_securise/nmap_scan_results.txt"  # Chemin du fichier Nmap
+    scan_file = "/home/sylvie/Projet_scripting_securise/nmap_scan_results.txt"
     analyze_scan_results(scan_file)

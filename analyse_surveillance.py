@@ -3,12 +3,11 @@ import json
 import sqlite3
 from datetime import datetime
 import time
-from sauvegarde import rotate_log, backup_files  # Importer les fonctions spécifiques
+from sauvegarde import rotate_log, backup_files  
 from gestionnaire_mdp import add_password, retrieve_password, load_key
 import subprocess
 
 from gestion_utilisateur.gestion_mdp import check_password_complexity, generate_password_report, force_password_change
-
 
 # =======================================================
 # Configuration des fichiers
@@ -17,10 +16,7 @@ LOG_FILE = "/home/sylvie/Projet_scripting_securise/hash_changes.log"
 JSON_FILE = "/home/sylvie/Projet_scripting_securise/alerts.json"
 SQLITE_DB = "/var/log/alerts.db"
 
-
-
-
-# Exemple d'appel des fonctions importées
+# Appel des fonctions importées
 username = "testuser"
 password = "Test@1234"
 
@@ -45,9 +41,6 @@ add_password('service', 'username', 'password', key)
 creds = retrieve_password('service', key)
 if creds:
     print(creds)
-
-
-
 
 def initialize_files():
     # Déclaration globale des variables avant toute utilisation
@@ -172,11 +165,11 @@ def main():
     store_events_json(events)
     store_events_sql(events)
 
-# appeler les fonctions de sauvegarde dans le script principal selon vos besoins
+# Appeler les fonctions de sauvegarde dans le script principal
 def main():
     # Exemple de surveillance de fichiers
     print("Démarrage de la surveillance des fichiers...")
-    # Par exemple, vérifier la rotation des logs tous les 10 minutes
+    # Vérifier la rotation des logs tous les 10 minutes
     while True:
        
         rotate_log()
@@ -185,13 +178,13 @@ def main():
         backup_files()
 
        
-        time.sleep(600)  # Par exemple, toutes les 10 minutes
+        time.sleep(600)  
 
 def main():
     # Charger la clé de chiffrement
     key = load_key()
 
-    # Ajouter un mot de passe (exemple)
+    # Ajouter un mot de passe
     add_password('Gmail', 'mon_username', 'mon_password', key)
 
     # Récupérer un mot de passe pour un service
@@ -199,10 +192,6 @@ def main():
     if creds:
         print(f"Service   : {creds['username']}")
         print(f"Mot de passe  : {creds['password']}")
-
-
-
-
 
 # Fonction pour scanner les ports d'une cible
 def scan_ports(target_ip):
@@ -213,7 +202,7 @@ def scan_ports(target_ip):
             ["bash", "/home/sylvie/Projet_scripting_securise/scan_ports.sh", target_ip],
             check=True, capture_output=True, text=True
         )
-        return result.stdout  # Retourne la sortie du scan
+        return result.stdout
     except subprocess.CalledProcessError as e:
         print(f"Erreur lors du scan des ports: {e}")
         return None
@@ -252,25 +241,20 @@ def main():
     else:
         print("Aucun résultat de scan n'a été généré.")
 
-
 # Fonction pour exécuter le script bash
 def run_bash_script(script_path):
     try:
         result = subprocess.run([script_path], check=True, text=True, capture_output=True)
-        print(result.stdout)  # Affiche le résultat de l'exécution du script
+        print(result.stdout)  
     except subprocess.CalledProcessError as e:
         print(f"Erreur lors de l'exécution du script: {e}")
-
 
 resultat_mdp = check_password_complexity("mon_parametre")
 print("Résultat de gestion_mdp.py:", resultat_mdp)
 
-
 # Exécuter le script gestion_utilisateur.sh
 script_path = "./gestion_utilisateur/gestion_utilisateur.sh"
 run_bash_script(script_path)
-
-
 
 if __name__ == "__main__":
     main()

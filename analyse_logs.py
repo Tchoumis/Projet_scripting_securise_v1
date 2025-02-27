@@ -6,7 +6,7 @@ import subprocess
 auth_log = "/var/log/auth.log"
 syslog_journal_cmd = "journalctl -u ssh.service"
 
-# Fonction pour analyser un fichier de log
+# Analyser un fichier de log
 def analyse_log(file_path, output_file, is_journal=False):
     if not is_journal and not os.path.exists(file_path):
         print(f"Erreur: Le fichier {file_path} n'existe pas.")
@@ -58,5 +58,5 @@ def display_summary():
     with open("failed_syslog_logins_python.txt", 'r') as f:
         print(f.read())
 
-# Appel de la fonction display_summary() si tu souhaites afficher directement un résumé
+# Appel de la fonction display_summary()
 # display_summary()

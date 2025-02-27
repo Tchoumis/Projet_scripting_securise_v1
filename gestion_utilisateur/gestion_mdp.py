@@ -49,7 +49,7 @@ import subprocess
 from datetime import datetime
 
 
-# Fonction pour vérifier la complexité du mot de passe
+# vérifier la complexité du mot de passe
 def check_password_complexity(password):
     # Critères de sécurité du mot de passe
     min_length = 8
@@ -91,7 +91,7 @@ def generate_password_report(username, password):
 
 # Exemple d'utilisation avec un mot de passe valide
 username = "testuser"
-password = "Test@1234"  # Un mot de passe valide
+password = "Test@1234"  
 
 # Vérifier la complexité du mot de passe
 is_valid, message = check_password_complexity(password)
