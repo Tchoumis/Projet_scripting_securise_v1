@@ -57,12 +57,6 @@ Ce projet implémente une série de scripts en **Python** et **Bash** visant à 
 Afin d'exécuter ces tests à intervalles réguliers, l'automatisation via Cron permet d'améliorer l'efficacité et d'assurer une surveillance continue.
 
 
-## Architecture
-
-![Capture d'écran de l'application](C:\Users\diginamic\Pictures\Screenpresso/Architecture.png)
-
-
-
 ## Arborescence du Projet
 
 ```bash
