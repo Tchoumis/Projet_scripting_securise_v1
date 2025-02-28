@@ -53,7 +53,7 @@ Ce projet implémente une série de scripts en **Python** et **Bash** visant à 
 ### 6. Automatisation des Mises à Jour de Sécurité (Bash + Python)
 - **Bash** : Exécute des commandes comme `apt-get update` ou `yum update` pour mettre à jour automatiquement les packages de sécurité du système.
 - **Python** : Analyse les logs des mises à jour et génère un rapport détaillé sur les mises à jour appliquées, y compris les vulnérabilités corrigées.
-### 6. Automatisation avec Cron
+### 7. Automatisation avec Cron
 Afin d'exécuter ces tests à intervalles réguliers, l'automatisation via Cron permet d'améliorer l'efficacité et d'assurer une surveillance continue.
 
 
