@@ -58,7 +58,7 @@ Afin d'exécuter ces tests à intervalles réguliers, l'automatisation via Cron 
 
 ## Architecture
 
-
+https://github.com/Tchoumis/Projet_scripting_securise_sylvie/blob/sylvie/Architecture.png?raw=true
 
 
 ## Arborescence du Projet
