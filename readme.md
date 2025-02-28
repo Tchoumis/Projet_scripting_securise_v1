@@ -92,7 +92,7 @@ Afin d'exécuter ces tests à intervalles réguliers, l'automatisation via Cron 
 ├── scan_ports.sh                 # Script Bash pour scanner les ports avec nmap
 ├── surveillance.sh               # Script Bash pour surveiller les tentatives de connexion échouées
 └── test_email.py                 # Script_test Python pour envoyer des alertes par email en cas de problème détecté
-
+```
 ### Système
 - **Kali Linux** : Ce projet est conçu pour fonctionner sur Kali Linux, une distribution spécialisée dans les tests de sécurité.
 - Outils nécessaires:
