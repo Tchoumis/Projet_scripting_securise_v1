@@ -19,7 +19,7 @@ Ce projet implémente une série de scripts en **Python** et **Bash** visant à 
 - **Python** : Charge le fichier de hachage et compare avec les précédents. Si des changements sont détectés, génère un rapport.
 
 ### 2. Gestion de Mots de Passe (Bash + Python)
-- **Python** : Chiffre et déchiffre les mots de passe en utilisant des bibliothèques comme `cryptography` ou `pycryptodome`.
+- **Python** : Chiffre et déchiffre les mots de passe en utilisant des bibliothèques comme `cryptography`.
 - **Bash** : Automatise la gestion des fichiers chiffrés et effectue des sauvegardes régulières pour garantir la sécurité des mots de passe.
 
 **Exemple de flux de travail** :
@@ -139,3 +139,6 @@ Exécution individuelle des fichiers .py
 ```bash
 python3 /chemin/vers/votre/nom_du_script.py
 ```
+## architecture
+
+![Capture d'écran de l'application](C:\Users\diginamic\Pictures\Screenpresso/Architecture.png)
