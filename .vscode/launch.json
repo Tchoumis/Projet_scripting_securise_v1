@@ -11,10 +11,11 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                " /etc/shadow",
+                "/etc/shadow",
                 "/etc/passwd",
                 "etc/ssh/ssh_config"
             ]
         }
     ]
 }
+

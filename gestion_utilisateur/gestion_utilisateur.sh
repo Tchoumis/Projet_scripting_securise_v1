@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Fonction pour créer un nouvel utilisateur
+# Créer un nouvel utilisateur
 create_toto() {
     local username=$1
     local password=$2
@@ -21,7 +21,7 @@ create_toto() {
     fi
 }
 
-# Fonction pour modifier un utilisateur
+# Modifier un utilisateur
 modify_toto() {
     local username=$1
     local new_password=$2
@@ -30,7 +30,7 @@ modify_toto() {
 
     # Vérifier si l'utilisateur existe avant de modifier
     if id "$username" &>/dev/null; then
-        # Modifier le mot de passe de l'utilisateur
+
         echo "$username:$new_password" | chpasswd
 
         # Ajouter l'utilisateur à un groupe supplémentaire
@@ -44,7 +44,7 @@ modify_toto() {
             echo "L'utilisateur $username a été ajouté au groupe $new_group."
         fi
 
-        # Modifier le shell de l'utilisateur (optionnel)
+        # Modifier le shell de l'utilisateur
         if [ -n "$new_shell" ]; then
             usermod -s "$new_shell" "$username"
             echo "Le shell de l'utilisateur $username a été changé en $new_shell."
@@ -59,13 +59,13 @@ modify_toto() {
     fi
 }
 
-# Fonction pour supprimer un utilisateur
+# Supprimer un utilisateur
 delete_user() {
     local username=$1
 
     # Vérifier si l'utilisateur existe avant la suppression
     if id "$username" &>/dev/null; then
-        # Supprimer l'utilisateur et ses fichiers sans tenir compte du mail spool
+        # Supprimer l'utilisateur et ses fichiers
         userdel -rf "$username"
         echo "Utilisateur $username supprimé."
 
@@ -86,7 +86,7 @@ delete_user() {
     fi
 }
 
-# Fonction pour vérifier si un utilisateur doit changer son mot de passe
+# Vérifier si un utilisateur doit changer son mot de passe
 check_password_expiry() {
     local username=$1
     local days_until_expiry=$2
@@ -100,15 +100,15 @@ check_password_expiry() {
     fi
 }
 
-# Exemple d'appel des fonctions
-# Créer un utilisateur
+# Appel des fonctions
+
 create_toto "testtoto" "toto@1234" "sudo"
 
-# Modifier un utilisateur
+
 modify_toto "testtoto" "abcd!123" "dev" "/bin/zsh"
 
-# Supprimer un utilisateur
+
 delete_user "testtoto"
 
-# Vérifier l'expiration du mot de passe
+
 check_password_expiry "testtoto" 30

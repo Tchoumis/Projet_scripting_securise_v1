@@ -19,3 +19,5 @@
 2025-02-26 23:42:34 - Arrêt du script et nettoyage.
 2025-02-27 00:30:54 - Démarrage de la surveillance des fichiers sensibles : /etc/passwd /etc/shadow /etc/ssh/sshd_config
 2025-02-27 00:31:02 - Arrêt du script et nettoyage.
+2025-02-27 02:00:01 - Démarrage de la surveillance des fichiers sensibles : /etc/passwd /etc/shadow /etc/ssh/sshd_config
+2025-02-28 02:00:01 - Démarrage de la surveillance des fichiers sensibles : /etc/passwd /etc/shadow /etc/ssh/sshd_config
