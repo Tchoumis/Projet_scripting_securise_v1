@@ -6,8 +6,8 @@ from datetime import datetime
 # =======================================================
 # Configuration des fichiers
 # =======================================================
-LOG_FILE = "/home/sylvie/Projet_scripting_securise/hash_changes.log"
-BACKUP_DIR = "/home/sylvie/Projet_scripting_securise/backups/"
+LOG_FILE = "/home/sylvie/Projet_scripting_securise_sylvie/hash_changes.log"
+BACKUP_DIR = "/home/sylvie/Projet_scripting_securise_sylvie/backups/"
 MAX_LOG_SIZE = 10 * 1024 * 1024
 DATE_FORMAT = "%Y%m%d_%H%M%S"
 

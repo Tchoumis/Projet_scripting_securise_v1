@@ -3,12 +3,12 @@
 # ===============================================
 # Configuration
 FILES="/etc/passwd /etc/shadow /etc/ssh/sshd_config"
-HASH_FILE="/home/sylvie/Projet_scripting_securise/file_hashes.log" 
-CHANGE_LOG="/home/sylvie/Projet_scripting_securise/hash_changes.log"
+HASH_FILE="/home/sylvie/Projet_scripting_securise_sylvie/file_hashes.log" 
+CHANGE_LOG="/home/sylvie/Projet_scripting_securise_sylvie/hash_changes.log"
 HASH_CMD="sha256sum"
 INOTIFY_EVENTS="modify,create,delete,move"
-LOG_FILE="/home/sylvie/Projet_scripting_securise/logs/auth.log"
-FAILED_LOGINS="/home/sylvie/Projet_scripting_securise/logs/failed_logins.log"
+LOG_FILE="/home/sylvie/Projet_scripting_securise_sylvie/logs/auth.log"
+FAILED_LOGINS="/home/sylvie/Projet_scripting_securise_sylvie/logs/failed_logins.log"
 
 
 source /home/sylvie/Projet_scripting_securise/.env  # Remplacez par le chemin correct

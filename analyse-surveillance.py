@@ -12,8 +12,8 @@ from gestion_utilisateur.gestion_mdp import check_password_complexity, generate_
 # =======================================================
 # Configuration des fichiers
 # =======================================================
-LOG_FILE = "/home/sylvie/Projet_scripting_securise/hash_changes.log"
-JSON_FILE = "/home/sylvie/Projet_scripting_securise/alerts.json"
+LOG_FILE = "/home/sylvie/Projet_scripting_securise_sylvie/hash_changes.log"
+JSON_FILE = "/home/sylvie/Projet_scripting_securise_sylvie/alerts.json"
 SQLITE_DB = "/home/sylvie/sqlite_db/alerts.db"
 
 
@@ -211,7 +211,7 @@ def main():
         time.sleep(3600)  # 10 minutes
 
     # Exemple de scan de port
-    target_ip = "192.168.1.115"
+    target_ip = "192.168.1.125"
     scan_results = scan_ports(target_ip)
     if scan_results:
         with open("nmap_scan_results.txt", "w") as f:

@@ -60,5 +60,5 @@ def send_alert(vulnerable_services):
 
 # Si le script est exécuté directement
 if __name__ == "__main__":
-    scan_file = "/home/sylvie/Projet_scripting_securise/nmap_scan_results.txt"
+    scan_file = "/home/sylvie/Projet_scripting_securise_sylvie/nmap_scan_results.txt"
     analyze_scan_results(scan_file)

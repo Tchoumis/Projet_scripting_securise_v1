@@ -124,6 +124,21 @@ Installez toutes les dépendances Python requises en utilisant le fichier requir
 ```bash
 pip install -r requirements.txt
 ```
+Créer un fichier wordlist pour Hydra, quelques mots de passe simples, pour les tests
+```bash
+echo -e "password\n123456\nadmin\nroot\nsylvie" > /home/sylvie/smallwordlist.txt
+chmod 600 /home/sylvie/smallwordlist.txt
+```
+wordlist plus complète
+```bash
+locate rockyou.txt
+
+sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
+```
+
+```bash
+ls -l /usr/share/wordlists/rockyou.txt
+```
 
 Avant de commencer l'exécution des scripts, veuillez suivre ces étapes importantes:
 
@@ -143,3 +158,49 @@ Exécution individuelle des fichiers .py
 ```bash
 python3 /chemin/vers/votre/nom_du_script.py
 ```
+# Description des fichiers main.py et analyse_surveillance.py
+
+---
+
+## main.py
+
+- **Rôle principal** : Point d'entrée général de ton projet.
+- **Fonctions clés** :  
+  - Exécution de tâches automatisées : gestion des utilisateurs, contrôle des mots de passe, scan de ports réseau.  
+  - Lancement des scripts Bash (ex : `scan_ports.sh`) pour scanner la cible réseau.  
+  - Récupération des résultats et traitement des retours (ex : analyse des scans, gestion des erreurs).  
+  - Orchestration globale des sous-tâches du projet.
+
+- **Usage** :  
+  - À lancer pour démarrer l’ensemble des opérations principales de ton projet de sécurité.  
+  - Script global qui englobe plusieurs sous-tâches.
+
+---
+
+## analyse_surveillance.py
+
+- **Rôle principal** : Analyse des fichiers de logs de sécurité (ex : échecs de connexion, changements système).
+- **Fonctions clés** :  
+  - Lecture et parsing des logs (ex : `auth.log`, `hash_changes.log`).  
+  - Extraction des événements suspects ou d’échecs de connexion.  
+  - Génération de rapports (JSON, base de données SQLite).  
+  - Envoi d’alertes ou notifications en cas d’anomalies.
+
+- **Usage** :  
+  - À lancer pour analyser en détail les logs, détecter des comportements anormaux ou attaques potentielles.  
+  - Script spécialisé dans l’analyse des événements.
+
+---
+
+## Résumé comparatif
+
+| Script                  | Fonction                                      | Quand l’utiliser                       |
+|-------------------------|-----------------------------------------------|-------------------------------------|
+| **main.py**             | Orchestration générale : gestion, scans, etc. | Pour lancer le projet globalement   |
+| **analyse_surveillance.py** | Analyse approfondie des logs et alertes        | Pour analyser les événements et générer des rapports |
+
+---
+
+Après execution du fichier: analyse-surveillance.py
+
+les événement détecté  sont dans le fichier hash_changes.log.

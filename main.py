@@ -12,8 +12,8 @@ from gestion_utilisateur.gestion_mdp import check_password_complexity, generate_
 # =======================================================
 # Configuration des fichiers
 # =======================================================
-LOG_FILE = "/home/sylvie/Projet_scripting_securise/hash_changes.log"
-JSON_FILE = "/home/sylvie/Projet_scripting_securise/alerts.json"
+LOG_FILE = "/home/sylvie/Projet_scripting_securise_sylvie/hash_changes.log"
+JSON_FILE = "/home/sylvie/Projet_scripting_securise_sylvie/alerts.json"
 SQLITE_DB = "/var/log/alerts.db"
 
 # Appel des fonctions importées
@@ -199,7 +199,7 @@ def scan_ports(target_ip):
         print(f"Scanning ports on {target_ip}...")
         # Exécution du script bash
         result = subprocess.run(
-            ["bash", "/home/sylvie/Projet_scripting_securise/scan_ports.sh", target_ip],
+            ["bash", "/home/sylvie/Projet_scripting_securise_sylvie/scan_ports.sh", target_ip],
             check=True, capture_output=True, text=True
         )
         return result.stdout
@@ -226,7 +226,7 @@ def analyze_scan_results(scan_file):
 
 # Fonction principale qui exécute les étapes
 def main():
-    target_ip = "192.168.1.152"  
+    target_ip = "192.168.1.125"  
     
     # Scanner les ports
     scan_results = scan_ports(target_ip)

