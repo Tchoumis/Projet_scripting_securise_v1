@@ -7,6 +7,9 @@ from sauvegarde import rotate_log, backup_files  # Importer les fonctions spéci
 from gestionnaire_mdp import add_password, retrieve_password, load_key
 import subprocess
 from gestion_utilisateur.gestion_mdp import check_password_complexity, generate_password_report, force_password_change
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 
 # =======================================================
@@ -174,6 +177,25 @@ def run_bash_script(script_path):
         print(result.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Erreur lors de l'exécution du script: {e}")
+
+
+# Fonction envoi de mail
+def send_alert_email(subject, message):
+    try:
+        msg = MIMEMultipart()
+        msg["From"] = SMTP_USER
+        msg["To"] = ADMIN_EMAIL
+        msg["Subject"] = subject
+        msg.attach(MIMEText(message, "plain"))
+
+        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+        server.starttls()
+        server.login(SMTP_USER, SMTP_PASSWORD)
+        server.sendmail(SMTP_USER, ADMIN_EMAIL, msg.as_string())
+        server.quit()
+        print("[INFO] Email d'alerte envoyé avec succès.")
+    except Exception as e:
+        print(f"[ERREUR] Échec de l'envoi de l'email : {e}")
 
 
 # =======================================================

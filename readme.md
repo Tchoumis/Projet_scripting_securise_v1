@@ -124,6 +124,30 @@ Installez toutes les dépendances Python requises en utilisant le fichier requir
 ```bash
 pip install -r requirements.txt
 ```
+
+pour utiliser un fichier .env avec python-dotenv
+```bash
+pip install python-dotenv
+
+```
+
+Contenu du fichier .venv
+```bash
+LOG_FILE=/home/sylvie/Projet_scripting_securise_sylvie/hash_changes.log
+JSON_FILE=/home/sylvie/Projet_scripting_securise_sylvie/alerts.json
+SQLITE_DB=/var/log/alerts.db
+
+# config.py
+
+ADMIN_EMAIL = "admin@example.com"
+SMTP_SERVER = "smtp.gmail.com"
+SMTP_PORT = 587
+SMTP_USER = "ton.email@gmail.com"
+SMTP_PASSWORD = "mot_de_passe_application"
+
+```
+
+
 Créer un fichier wordlist pour Hydra, quelques mots de passe simples, pour les tests
 ```bash
 echo -e "password\n123456\nadmin\nroot\nsylvie" > /home/sylvie/smallwordlist.txt
