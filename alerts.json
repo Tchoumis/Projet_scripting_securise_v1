@@ -1,6 +1,178 @@
 [
     {
-        "timestamp": "2025-06-09 20:12:23",
-        "message": "IPs bannies : Aucune"
+        "timestamp": "2025-06-10 21:38:08,095",
+        "message": "INFO - === Initialisation des fichiers ==="
+    },
+    {
+        "timestamp": "2025-06-10 21:38:08,095",
+        "message": "INFO - === Analyse des logs ==="
+    },
+    {
+        "timestamp": "2025-06-10 21:38:08,104",
+        "message": "INFO - Événements sauvegardés dans JSON."
+    },
+    {
+        "timestamp": "2025-06-10 21:38:08,138",
+        "message": "INFO - Événements sauvegardés dans SQLite."
+    },
+    {
+        "timestamp": "2025-06-10 21:38:08,139",
+        "message": "INFO - === Vérification des mots de passe ==="
+    },
+    {
+        "timestamp": "2025-06-10 21:38:08,169",
+        "message": "INFO - Service: mon_username, Mot de passe: mon_password"
+    },
+    {
+        "timestamp": "2025-06-10 21:38:08,170",
+        "message": "INFO - === Lancement du scan de ports ==="
+    },
+    {
+        "timestamp": "2025-06-10 21:38:08,170",
+        "message": "INFO - Scan de ports sur 192.168.1.125..."
+    },
+    {
+        "timestamp": "2025-06-10 21:38:27,854",
+        "message": "INFO - Contenu du fichier :"
+    },
+    {
+        "timestamp": "2025-06-10 21:38:27,855",
+        "message": "INFO - === Test du système de défense avec Fail2ban ==="
+    },
+    {
+        "timestamp": "2025-06-10 21:38:27,856",
+        "message": "INFO - Lancement du bruteforce SSH simulé sur 192.168.1.125..."
+    },
+    {
+        "timestamp": "2025-06-10 21:38:31,688",
+        "message": "INFO - Status fail2ban sshd:"
+    },
+    {
+        "timestamp": "2025-06-10 21:38:31,689",
+        "message": "INFO - IPs bannies : Aucune"
+    },
+    {
+        "timestamp": "2025-06-10 21:38:31,690",
+        "message": "INFO - === Lancement du script utilisateur ==="
+    },
+    {
+        "timestamp": "2025-06-10 21:38:32,135",
+        "message": "INFO - Utilisateur testtoto créé et ajouté au groupe sudo."
+    },
+    {
+        "timestamp": "2025-06-10 21:38:32,135",
+        "message": "INFO - === Démarrage de la surveillance de la sauvegarde et rotation ==="
+    },
+    {
+        "timestamp": "2025-06-10 21:38:32,137",
+        "message": "INFO - Rotation et sauvegarde effectuées."
+    },
+    {
+        "timestamp": "2025-06-10 21:38:55,408",
+        "message": "INFO - Surveillance interrompue par l'utilisateur."
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,435",
+        "message": "INFO - === Initialisation des fichiers ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,436",
+        "message": "INFO - === Analyse des logs ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,448",
+        "message": "WARNING - Format date invalide dans la ligne : Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway)."
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,448",
+        "message": "WARNING - Format date invalide dans la ligne : 2025-06-10 21:38:31 - IPs bannies : Aucune"
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,450",
+        "message": "INFO - Événements sauvegardés dans JSON."
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,467",
+        "message": "INFO - Événements sauvegardés dans SQLite."
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,468",
+        "message": "INFO - === Vérification des mots de passe ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,478",
+        "message": "INFO - Service: mon_username, Mot de passe: mon_password"
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,478",
+        "message": "INFO - === Lancement du scan de ports ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:04:54,478",
+        "message": "INFO - Scan de ports sur 192.168.1.125..."
+    },
+    {
+        "timestamp": "2025-06-10 22:05:20,986",
+        "message": "INFO - Contenu du fichier :"
+    },
+    {
+        "timestamp": "2025-06-10 22:05:20,987",
+        "message": "INFO - === Test du système de défense avec Fail2ban ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:05:20,987",
+        "message": "INFO - Lancement du bruteforce SSH simulé sur 192.168.1.125..."
+    },
+    {
+        "timestamp": "2025-06-10 22:05:24,906",
+        "message": "INFO - Status fail2ban sshd:"
+    },
+    {
+        "timestamp": "2025-06-10 22:05:24,906",
+        "message": "INFO - IPs bannies : Aucune"
+    },
+    {
+        "timestamp": "2025-06-10 22:05:24,906",
+        "message": "INFO - === Lancement du script utilisateur ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:05:25,344",
+        "message": "INFO - Utilisateur testtoto créé et ajouté au groupe sudo."
+    },
+    {
+        "timestamp": "2025-06-10 22:05:25,344",
+        "message": "INFO - === Démarrage de la surveillance de la sauvegarde et rotation ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:05:25,351",
+        "message": "INFO - Rotation et sauvegarde effectuées."
+    },
+    {
+        "timestamp": "2025-06-10 22:05:31,954",
+        "message": "INFO - Surveillance interrompue par l'utilisateur."
+    },
+    {
+        "timestamp": "2025-06-10 22:10:37,683",
+        "message": "INFO - === Initialisation des fichiers ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:10:37,684",
+        "message": "INFO - === Analyse des logs ==="
+    },
+    {
+        "timestamp": "2025-06-10 22:10:37,694",
+        "message": "WARNING - Format date invalide dans la ligne : Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway)."
+    },
+    {
+        "timestamp": "2025-06-10 22:10:37,695",
+        "message": "WARNING - Format date invalide dans la ligne : 2025-06-10 21:38:31 - IPs bannies : Aucune"
+    },
+    {
+        "timestamp": "2025-06-10 22:10:37,696",
+        "message": "WARNING - Format date invalide dans la ligne : Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway)."
+    },
+    {
+        "timestamp": "2025-06-10 22:10:37,697",
+        "message": "WARNING - Format date invalide dans la ligne : 2025-06-10 22:05:24 - IPs bannies : Aucune"
     }
 ]

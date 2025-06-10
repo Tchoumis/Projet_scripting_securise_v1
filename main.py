@@ -3,6 +3,8 @@ import json
 import sqlite3
 import time
 import subprocess
+import threading
+import logging
 from datetime import datetime
 import smtplib
 from email.mime.text import MIMEText
@@ -15,6 +17,7 @@ from gestion_utilisateur.gestion_mdp import check_password_complexity, generate_
 from dotenv import load_dotenv
 load_dotenv()
 
+# Chargement des variables d'environnement
 LOG_FILE = os.getenv("LOG_FILE")
 JSON_FILE = os.getenv("JSON_FILE")
 SQLITE_DB = os.getenv("SQLITE_DB")
@@ -24,19 +27,48 @@ SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
 SMTP_USER = os.getenv("SMTP_USER")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
 
-def initialize_files():
-    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
-    os.makedirs(os.path.dirname(JSON_FILE), exist_ok=True)
-    os.makedirs(os.path.dirname(SQLITE_DB), exist_ok=True)
 
+# Configuration logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler(LOG_FILE) if LOG_FILE else logging.NullHandler(),
+        logging.StreamHandler()
+    ]
+)
+
+def validate_env_vars():
+    required_vars = {
+        "LOG_FILE": LOG_FILE,
+        "JSON_FILE": JSON_FILE,
+        "SQLITE_DB": SQLITE_DB,
+        "ADMIN_EMAIL": ADMIN_EMAIL,
+        "SMTP_SERVER": SMTP_SERVER,
+        "SMTP_USER": SMTP_USER,
+        "SMTP_PASSWORD": SMTP_PASSWORD
+    }
+    missing = [k for k,v in required_vars.items() if not v]
+    if missing:
+        logging.error(f"Variables d'environnement manquantes : {missing}")
+        return False
+    return True
+
+def initialize_files():
+    for path in [LOG_FILE, JSON_FILE, SQLITE_DB]:
+        try:
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+        except Exception as e:
+            logging.error(f"Erreur création dossier {os.path.dirname(path)} : {e}")
+    
     try:
-        if not os.path.exists(LOG_FILE):
+        if LOG_FILE and not os.path.exists(LOG_FILE):
             with open(LOG_FILE, 'w'): pass
-            print(f"[INFO] Fichier log créé : {LOG_FILE}")
-        if not os.path.exists(JSON_FILE):
+            logging.info(f"Fichier log créé : {LOG_FILE}")
+        if JSON_FILE and not os.path.exists(JSON_FILE):
             with open(JSON_FILE, 'w'): pass
-            print(f"[INFO] Fichier JSON créé : {JSON_FILE}")
-        if not os.path.exists(SQLITE_DB):
+            logging.info(f"Fichier JSON créé : {JSON_FILE}")
+        if SQLITE_DB and not os.path.exists(SQLITE_DB):
             conn = sqlite3.connect(SQLITE_DB)
             c = conn.cursor()
             c.execute('''CREATE TABLE IF NOT EXISTS alerts (
@@ -47,13 +79,15 @@ def initialize_files():
                         )''')
             conn.commit()
             conn.close()
-            print(f"[INFO] DB SQLite créée : {SQLITE_DB}")
+            logging.info(f"Base SQLite créée : {SQLITE_DB}")
     except PermissionError as e:
-        print(f"[ERREUR] Permission refusée : {e}")
+        logging.error(f"Permission refusée : {e}")
+    except Exception as e:
+        logging.error(f"Erreur lors de l'initialisation des fichiers : {e}")
 
 def parse_log_file():
     events = []
-    if os.path.exists(LOG_FILE):
+    if LOG_FILE and os.path.exists(LOG_FILE):
         try:
             with open(LOG_FILE, "r") as f:
                 for line in f:
@@ -61,23 +95,37 @@ def parse_log_file():
                     if " - " in line:
                         timestamp_str, message = line.split(" - ", 1)
                         try:
-                            datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S")
-                            events.append({"timestamp": timestamp_str, "message": message})
+                            # Acceptation des millisecondes
+                            datetime.strptime(timestamp_str, "%Y-%m-%d %H:%M:%S,%f")
+                            # Par exemple on peut filtrer certains messages ici (optionnel)
+                            if not message.startswith("IPs bannies :"):
+                                events.append({"timestamp": timestamp_str, "message": message})
                         except ValueError:
-                            continue
+                            logging.warning(f"Format date invalide dans la ligne : {line}")
         except Exception as e:
-            print(f"[ERREUR] Lecture du log : {e}")
+            logging.error(f"Lecture du log : {e}")
+    else:
+        logging.warning(f"Fichier log introuvable : {LOG_FILE}")
     return events
 
+
+
 def store_events_json(events):
+    if not JSON_FILE:
+        logging.error("JSON_FILE non défini")
+        return
     try:
         with open(JSON_FILE, "w") as f:
             json.dump(events, f, indent=4, ensure_ascii=False)
-        print("[INFO] Événements sauvegardés dans JSON.")
+        logging.info("Événements sauvegardés dans JSON.")
     except Exception as e:
-        print(f"[ERREUR] Sauvegarde JSON : {e}")
+        logging.error(f"Sauvegarde JSON : {e}")
 
 def store_events_sql(events):
+    if not SQLITE_DB:
+        logging.error("SQLITE_DB non défini")
+        return
+    conn = None
     try:
         conn = sqlite3.connect(SQLITE_DB)
         c = conn.cursor()
@@ -86,24 +134,25 @@ def store_events_sql(events):
             if c.fetchone()[0] == 0:
                 c.execute("INSERT INTO alerts (timestamp, message) VALUES (?, ?)", (event["timestamp"], event["message"]))
         conn.commit()
-        print("[INFO] Événements sauvegardés dans SQLite.")
+        logging.info("Événements sauvegardés dans SQLite.")
     except sqlite3.Error as e:
-        print(f"[ERREUR] SQLite : {e}")
+        logging.error(f"SQLite : {e}")
     finally:
-        conn.close()
+        if conn:
+            conn.close()
 
 def scan_ports(target_ip):
     try:
-        print(f"Scan de ports sur {target_ip}...")
+        logging.info(f"Scan de ports sur {target_ip}...")
         result = subprocess.run(
             ["bash", "/home/sylvie/Projet_scripting_securise_sylvie/scan_ports.sh", target_ip],
             check=True, capture_output=True, text=True
         )
         return result.stdout
     except subprocess.CalledProcessError as e:
-        print(f"[ERREUR] Scan ports : {e}")
-        print(f"stdout : {e.stdout}")
-        print(f"stderr : {e.stderr}")
+        logging.error(f"Scan ports : {e}")
+        logging.error(f"stdout : {e.stdout}")
+        logging.error(f"stderr : {e.stderr}")
         return None
 
 def analyze_scan_results(scan_file):
@@ -113,20 +162,23 @@ def analyze_scan_results(scan_file):
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True
         )
         if result.returncode == 0:
-            print(result.stdout)
+            logging.info(result.stdout)
         else:
-            print(result.stderr)
+            logging.error(result.stderr)
     except Exception as e:
-        print(f"[ERREUR] Analyse scan : {e}")
+        logging.error(f"Analyse scan : {e}")
 
 def run_bash_script(script_path):
     try:
         result = subprocess.run([script_path], check=True, text=True, capture_output=True)
-        print(result.stdout)
+        logging.info(result.stdout)
     except subprocess.CalledProcessError as e:
-        print(f"[ERREUR] Script Bash : {e}")
+        logging.error(f"Script Bash : {e}")
 
 def send_alert_email(subject, message):
+    if not all([SMTP_SERVER, SMTP_PORT, SMTP_USER, SMTP_PASSWORD, ADMIN_EMAIL]):
+        logging.error("Variables SMTP ou email admin non définies, impossible d'envoyer l'alerte.")
+        return
     try:
         msg = MIMEMultipart()
         msg["From"] = SMTP_USER
@@ -139,18 +191,18 @@ def send_alert_email(subject, message):
         server.login(SMTP_USER, SMTP_PASSWORD)
         server.sendmail(SMTP_USER, ADMIN_EMAIL, msg.as_string())
         server.quit()
-        print("[INFO] Email d'alerte envoyé.")
+        logging.info("Email d'alerte envoyé.")
     except Exception as e:
-        print(f"[ERREUR] Email : {e}")
+        logging.error(f"Email : {e}")
 
 def test_fail2ban_bruteforce(ip):
-    print(f"[TEST] Lancement du bruteforce SSH simulé sur {ip}...")
+    logging.info(f"Lancement du bruteforce SSH simulé sur {ip}...")
     try:
         subprocess.run([
             "hydra", "-l", "root", "-P", "/home/sylvie/smallwordlist.txt", f"ssh://{ip}"
         ], check=False, capture_output=True, text=True)
     except Exception as e:
-        print(f"[ERREUR] Échec du test bruteforce : {e}")
+        logging.error(f"Échec du test bruteforce : {e}")
 
 def check_fail2ban_status(ip):
     try:
@@ -158,40 +210,47 @@ def check_fail2ban_status(ip):
                                 capture_output=True, text=True)
 
         output = result.stdout
-        print(output)
+        logging.info(f"Status fail2ban sshd:\n{output}")
 
-        banned_ips = None
         if "Banned IP list:" in output:
             banned_ips = output.split("Banned IP list:")[1].strip()
             banned_ips = banned_ips if banned_ips else "Aucune"
-            print("[INFO] IPs bannies :", banned_ips)
+            logging.info(f"IPs bannies : {banned_ips}")
 
-            # Écriture dans le fichier de log
+            # Ecrire dans le log
             with open(LOG_FILE, "a") as log:
                 log.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} - IPs bannies : {banned_ips}\n")
 
-            # Envoi d'une alerte si des IPs sont bannies
             if banned_ips != "Aucune":
                 send_alert_email("Alerte Fail2ban", f"IP(s) actuellement bannie(s) : {banned_ips}")
 
     except Exception as e:
-        print(f"[ERREUR] Vérification Fail2ban : {e}")
+        logging.error(f"Vérification Fail2ban : {e}")
 
-
-
-
+def periodic_backup_rotation():
+    while True:
+        rotate_log()
+        backup_files()
+        logging.info("Rotation et sauvegarde effectuées.")
+        time.sleep(600)  # 10 minutes
 
 def main():
-    print("=== Initialisation des fichiers ===")
+    if not validate_env_vars():
+        logging.error("Variables d'environnement manquantes. Arrêt du script.")
+        return
+
+    logging.info("=== Initialisation des fichiers ===")
     initialize_files()
 
-    print("=== Analyse des logs ===")
+    logging.info("=== Analyse des logs ===")
     events = parse_log_file()
     if events:
         store_events_json(events)
         store_events_sql(events)
+    else:
+        logging.info("Aucun événement détecté dans les logs.")
 
-    print("=== Vérification des mots de passe ===")
+    logging.info("=== Vérification des mots de passe ===")
     username = "testuser"
     password = "Test@1234"
     generate_password_report(username, password)
@@ -202,9 +261,9 @@ def main():
     add_password('Gmail', 'mon_username', 'mon_password', key)
     creds = retrieve_password('Gmail', key)
     if creds:
-        print(f"Service: {creds['username']}, Mot de passe: {creds['password']}")
+        logging.info(f"Service: {creds['username']}, Mot de passe: {creds['password']}")
 
-    print("=== Lancement du scan de ports ===")
+    logging.info("=== Lancement du scan de ports ===")
     ip = "192.168.1.125"
     results = scan_ports(ip)
     if results:
@@ -212,21 +271,24 @@ def main():
             f.write(results)
         analyze_scan_results("nmap_scan_results.txt")
 
-        print("=== Test du système de défense avec Fail2ban ===")
+        logging.info("=== Test du système de défense avec Fail2ban ===")
         test_fail2ban_bruteforce(ip)
         check_fail2ban_status(ip)
+    else:
+        logging.warning("Aucun résultat de scan généré.")
 
-    print("=== Lancement du script utilisateur ===")
+    logging.info("=== Lancement du script utilisateur ===")
     run_bash_script("./gestion_utilisateur/gestion_utilisateur.sh")
 
-    print("=== Sauvegarde et rotation des logs toutes les 10 minutes ===")
+    logging.info("=== Démarrage de la surveillance de la sauvegarde et rotation ===")
     try:
+        backup_thread = threading.Thread(target=periodic_backup_rotation, daemon=True)
+        backup_thread.start()
+        # Le thread tourne en arrière-plan, on peut éventuellement faire autre chose ici ou juste attendre.
         while True:
-            rotate_log()
-            backup_files()
-            time.sleep(600)
+            time.sleep(1)
     except KeyboardInterrupt:
-        print("\n[INFO] Surveillance interrompue par l'utilisateur.")
+        logging.info("Surveillance interrompue par l'utilisateur.")
 
 if __name__ == "__main__":
     main()

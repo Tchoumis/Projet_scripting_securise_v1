@@ -1,2 +1,160 @@
-2025-06-09 20:12:23 - IPs bannies : Aucune
-2025-06-09 20:23:43 - IPs bannies : Aucune
+2025-06-10 21:38:08,095 - INFO - === Initialisation des fichiers ===
+2025-06-10 21:38:08,095 - INFO - === Analyse des logs ===
+2025-06-10 21:38:08,104 - INFO - Événements sauvegardés dans JSON.
+2025-06-10 21:38:08,138 - INFO - Événements sauvegardés dans SQLite.
+2025-06-10 21:38:08,139 - INFO - === Vérification des mots de passe ===
+2025-06-10 21:38:08,169 - INFO - Service: mon_username, Mot de passe: mon_password
+2025-06-10 21:38:08,170 - INFO - === Lancement du scan de ports ===
+2025-06-10 21:38:08,170 - INFO - Scan de ports sur 192.168.1.125...
+2025-06-10 21:38:27,854 - INFO - Contenu du fichier :
+Scanning ports on 192.168.1.125...
+Ports ouverts trouvés sur 192.168.1.125 : 22
+Scanning web services on 192.168.1.125 with Nikto...
+Aucun service HTTP/HTTPS trouvé, skipping Nikto scan.
+Testing SSH login with Hydra on 192.168.1.125...
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-06-10 21:38:11
+[DATA] max 1 task per 1 server, overall 1 task, 5 login tries (l:1/p:5), ~5 tries per task
+[DATA] attacking ssh://192.168.1.125:22/
+1 of 1 target completed, 0 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-06-10 21:38:27
+
+Aucune vulnérabilité détectée.
+
+2025-06-10 21:38:27,855 - INFO - === Test du système de défense avec Fail2ban ===
+2025-06-10 21:38:27,856 - INFO - Lancement du bruteforce SSH simulé sur 192.168.1.125...
+2025-06-10 21:38:31,688 - INFO - Status fail2ban sshd:
+Status for the jail: sshd
+|- Filter
+|  |- Currently failed:	0
+|  |- Total failed:	0
+|  `- Journal matches:	_SYSTEMD_UNIT=ssh.service + _COMM=sshd
+`- Actions
+   |- Currently banned:	0
+   |- Total banned:	0
+   `- Banned IP list:	
+
+2025-06-10 21:38:31,689 - INFO - IPs bannies : Aucune
+2025-06-10 21:38:31 - IPs bannies : Aucune
+2025-06-10 21:38:31,690 - INFO - === Lancement du script utilisateur ===
+2025-06-10 21:38:32,135 - INFO - Utilisateur testtoto créé et ajouté au groupe sudo.
+L'utilisateur testtoto a été ajouté au groupe dev.
+Le shell de l'utilisateur testtoto a été changé en /bin/zsh.
+Mot de passe de testtoto modifié.
+Utilisateur testtoto supprimé.
+L'utilisateur testtoto a été correctement supprimé.
+L'utilisateur testtoto n'existe pas.
+
+2025-06-10 21:38:32,135 - INFO - === Démarrage de la surveillance de la sauvegarde et rotation ===
+2025-06-10 21:38:32,137 - INFO - Rotation et sauvegarde effectuées.
+2025-06-10 21:38:55,408 - INFO - Surveillance interrompue par l'utilisateur.
+2025-06-10 22:04:54,435 - INFO - === Initialisation des fichiers ===
+2025-06-10 22:04:54,436 - INFO - === Analyse des logs ===
+2025-06-10 22:04:54,448 - WARNING - Format date invalide dans la ligne : Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+2025-06-10 22:04:54,448 - WARNING - Format date invalide dans la ligne : 2025-06-10 21:38:31 - IPs bannies : Aucune
+2025-06-10 22:04:54,450 - INFO - Événements sauvegardés dans JSON.
+2025-06-10 22:04:54,467 - INFO - Événements sauvegardés dans SQLite.
+2025-06-10 22:04:54,468 - INFO - === Vérification des mots de passe ===
+2025-06-10 22:04:54,478 - INFO - Service: mon_username, Mot de passe: mon_password
+2025-06-10 22:04:54,478 - INFO - === Lancement du scan de ports ===
+2025-06-10 22:04:54,478 - INFO - Scan de ports sur 192.168.1.125...
+2025-06-10 22:05:20,986 - INFO - Contenu du fichier :
+Scanning ports on 192.168.1.125...
+Ports ouverts trouvés sur 192.168.1.125 : 22
+Scanning web services on 192.168.1.125 with Nikto...
+Aucun service HTTP/HTTPS trouvé, skipping Nikto scan.
+Testing SSH login with Hydra on 192.168.1.125...
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-06-10 22:05:04
+[DATA] max 1 task per 1 server, overall 1 task, 5 login tries (l:1/p:5), ~5 tries per task
+[DATA] attacking ssh://192.168.1.125:22/
+1 of 1 target completed, 0 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-06-10 22:05:20
+
+Aucune vulnérabilité détectée.
+
+2025-06-10 22:05:20,987 - INFO - === Test du système de défense avec Fail2ban ===
+2025-06-10 22:05:20,987 - INFO - Lancement du bruteforce SSH simulé sur 192.168.1.125...
+2025-06-10 22:05:24,906 - INFO - Status fail2ban sshd:
+Status for the jail: sshd
+|- Filter
+|  |- Currently failed:	0
+|  |- Total failed:	0
+|  `- Journal matches:	_SYSTEMD_UNIT=ssh.service + _COMM=sshd
+`- Actions
+   |- Currently banned:	0
+   |- Total banned:	0
+   `- Banned IP list:	
+
+2025-06-10 22:05:24,906 - INFO - IPs bannies : Aucune
+2025-06-10 22:05:24 - IPs bannies : Aucune
+2025-06-10 22:05:24,906 - INFO - === Lancement du script utilisateur ===
+2025-06-10 22:05:25,344 - INFO - Utilisateur testtoto créé et ajouté au groupe sudo.
+L'utilisateur testtoto a été ajouté au groupe dev.
+Le shell de l'utilisateur testtoto a été changé en /bin/zsh.
+Mot de passe de testtoto modifié.
+Utilisateur testtoto supprimé.
+L'utilisateur testtoto a été correctement supprimé.
+L'utilisateur testtoto n'existe pas.
+
+2025-06-10 22:05:25,344 - INFO - === Démarrage de la surveillance de la sauvegarde et rotation ===
+2025-06-10 22:05:25,351 - INFO - Rotation et sauvegarde effectuées.
+2025-06-10 22:05:31,954 - INFO - Surveillance interrompue par l'utilisateur.
+2025-06-10 22:10:37,683 - INFO - === Initialisation des fichiers ===
+2025-06-10 22:10:37,684 - INFO - === Analyse des logs ===
+2025-06-10 22:10:37,694 - WARNING - Format date invalide dans la ligne : Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+2025-06-10 22:10:37,695 - WARNING - Format date invalide dans la ligne : 2025-06-10 21:38:31 - IPs bannies : Aucune
+2025-06-10 22:10:37,696 - WARNING - Format date invalide dans la ligne : Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+2025-06-10 22:10:37,697 - WARNING - Format date invalide dans la ligne : 2025-06-10 22:05:24 - IPs bannies : Aucune
+2025-06-10 22:10:37,700 - INFO - Événements sauvegardés dans JSON.
+2025-06-10 22:10:37,727 - INFO - Événements sauvegardés dans SQLite.
+2025-06-10 22:10:37,727 - INFO - === Vérification des mots de passe ===
+2025-06-10 22:10:37,735 - INFO - Service: mon_username, Mot de passe: mon_password
+2025-06-10 22:10:37,736 - INFO - === Lancement du scan de ports ===
+2025-06-10 22:10:37,736 - INFO - Scan de ports sur 192.168.1.125...
+2025-06-10 22:11:05,507 - INFO - Contenu du fichier :
+Scanning ports on 192.168.1.125...
+Ports ouverts trouvés sur 192.168.1.125 : 22
+Scanning web services on 192.168.1.125 with Nikto...
+Aucun service HTTP/HTTPS trouvé, skipping Nikto scan.
+Testing SSH login with Hydra on 192.168.1.125...
+Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2025-06-10 22:10:46
+[DATA] max 1 task per 1 server, overall 1 task, 5 login tries (l:1/p:5), ~5 tries per task
+[DATA] attacking ssh://192.168.1.125:22/
+1 of 1 target completed, 0 valid password found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2025-06-10 22:11:05
+
+Aucune vulnérabilité détectée.
+
+2025-06-10 22:11:05,508 - INFO - === Test du système de défense avec Fail2ban ===
+2025-06-10 22:11:05,509 - INFO - Lancement du bruteforce SSH simulé sur 192.168.1.125...
+2025-06-10 22:11:09,429 - INFO - Status fail2ban sshd:
+Status for the jail: sshd
+|- Filter
+|  |- Currently failed:	0
+|  |- Total failed:	3
+|  `- Journal matches:	_SYSTEMD_UNIT=ssh.service + _COMM=sshd
+`- Actions
+   |- Currently banned:	1
+   |- Total banned:	1
+   `- Banned IP list:	192.168.1.139
+
+2025-06-10 22:11:09,430 - INFO - IPs bannies : 192.168.1.139
+2025-06-10 22:11:09 - IPs bannies : 192.168.1.139
+2025-06-10 22:11:11,438 - INFO - Email d'alerte envoyé.
+2025-06-10 22:11:11,439 - INFO - === Lancement du script utilisateur ===
+2025-06-10 22:11:12,034 - INFO - Utilisateur testtoto créé et ajouté au groupe sudo.
+L'utilisateur testtoto a été ajouté au groupe dev.
+Le shell de l'utilisateur testtoto a été changé en /bin/zsh.
+Mot de passe de testtoto modifié.
+Utilisateur testtoto supprimé.
+L'utilisateur testtoto a été correctement supprimé.
+L'utilisateur testtoto n'existe pas.
+
+2025-06-10 22:11:12,034 - INFO - === Démarrage de la surveillance de la sauvegarde et rotation ===
+2025-06-10 22:11:12,037 - INFO - Rotation et sauvegarde effectuées.
+2025-06-10 22:11:21,914 - INFO - Surveillance interrompue par l'utilisateur.
