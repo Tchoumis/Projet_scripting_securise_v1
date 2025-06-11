@@ -109,6 +109,7 @@ Pour installer les dépendances nécessaires à Python, suivez les étapes ci-de
    sudo apt-get install mailutils
    sudo apt-get install notify
    sudo apt-get install yagmail
+   sudo apt install inotify-tools
    ```
 
 Créez un mot de passe d'application pour l'envoi d'e-mails (selon votre configuration de messagerie, cela peut être nécessaire).
