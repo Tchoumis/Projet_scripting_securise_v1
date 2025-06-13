@@ -63,36 +63,40 @@ https://github.com/Tchoumis/Projet_scripting_securise_sylvie/blob/930092fe77b785
 
 ## Arborescence du Projet
 
-```bash
-├── __pycache__/                  # Dossier contenant le fichier launch.json ou il faut indiquer les fichier a surveiller 
-├── backups/                      # Dossier contenant les sauvegardes de fichiers ou de données chiffrées
-│   └── passwords.enc             # Mots de passe chiffrés pour le gestionnaire de mots de passe
-├── gestion_utilisateur/          # Dossier contenant les scripts relatifs à la gestion des utilisateurs
-│   ├── __pycache__/              # Dossier avec les fichiers compilés Python pour la gestion des utilisateurs
-│   ├── gestion_mdp.py            # Script Python pour la gestion des mots de passe
-│   └── gestion_utilisateur.sh    # Script Bash pour la gestion des utilisateurs et des mots de passe
-├── logs/                         # Dossier contenant les fichiers logs générés pendant l'exécution des scripts
-│   ├── analyze_scan_results.log  # Résultats des analyses de ports et services, générés par le script Python
-│   ├── scan_ports.log            # Logs générés par le scan des ports (via nmap, Nikto et hydra)
-│   └── surveillance.log          # Logs des échecs de connexion et autres anomalies détectées
-├── analyse-surveillance.py       # Script Python pour l'analyse des logs et la détection d'intrusions
-├── analyse_logs.py               # Script Python pour l'analyse des logs d'authentification et de syslog ou systemctl
-├── analyse_logs.sh               # Script Bash pour surveiller en temps réel les logs d'authentification
-├── analyze_scan_results.py       # Script Python pour analyser les résultats du scan de ports
-├── gestionnaire_mdp.py           # Script Python pour le gestionnaire de mots de passe
-├── hash_changes.log              # Fichier contenant les hachages des fichiers surveillés pour les changements
-├── hydra.restore                 # Fichier de sauvegarde de l'outil de brute-force hydra
-├── key.key                       # Clé de chiffrement/déchiffrement pour les mots de passe
-├── main.py                       # Script principal qui orchestre l'exécution des autres scripts
-├── nmap_scan_results.txt         # Fichier contenant les résultats du scan de ports effectué par nmap
-├── password_report.txt           # Rapport sur la sécurité des mots de passe généré par Python
-├── passwords.enc                 # Fichier contenant les mots de passe chiffrés
-├── requirements.txt              # Liste des dépendances Python nécessaires pour exécuter les scripts
-├── sauvegarde.py                 # Script Python pour sauvegarder et chiffrer les mots de passe
-├── scan_ports.sh                 # Script Bash pour scanner les ports avec nmap
-├── surveillance.sh               # Script Bash pour surveiller les tentatives de connexion échouées
-└── test_email.py                 # Script_test Python pour envoyer des alertes par email en cas de problème détecté
+```bash=
+Projet_scripting_securise_sylvie/
+├── .env                        # Variables d’environnement (ex : mots de passe, config email SMTP)
+├── .gitignore                  # Fichier pour ignorer certains fichiers/dossiers dans Git
+├── .venv/                      # Environnement virtuel Python isolé
+│
+├── alerts.json                 # Fichier JSON contenant les alertes détectées
+├── analyse_logs.py             # Script Python pour analyser auth.log et syslog
+├── analyse_logs.sh             # Script Bash de surveillance temps réel des logs
+├── analyse-surveillance.py     # Script Python pour la détection de tentatives d'intrusion
+├── analyze_scan_results.py     # Analyse des résultats de scan de ports/services (via Nmap)
+│
+├── file_hashes.log             # Journal des hachages SHA256 des fichiers sensibles
+├── hash_changes.log            # Journal des modifications détectées sur fichiers critiques
+├── key.key                     # Clé symétrique utilisée pour le chiffrement/déchiffrement
+│
+├── gestionnaire_mdp.py         # Gestionnaire de mots de passe sécurisé (avec chiffrement)
+├── sauvegarde.py               # Script Python de sauvegarde automatique des mots de passe
+├── passwords.enc               # Fichier chiffré contenant les mots de passe enregistrés
+│
+├── gestion_utilisateur/        # Dossier de gestion des utilisateurs
+│   ├── gestion_mdp.py          # Vérification des règles de complexité des mots de passe
+│   └── gestion_utilisateur.sh  # Script Bash pour gérer les utilisateurs système
+│
+├── main.py                     # Script principal orchestrant l’exécution des autres scripts
+├── readme.md                   # Documentation du projet
+├── requirements.txt            # Dépendances Python à installer via pip
+├── scan_ports.sh               # Script Bash pour scanner les ports et services (Nmap)
+├── surveillance.sh             # Script Bash de surveillance des connexions SSH échouées
+├── maj_securite.sh              # Mise à jour automatique des paquets système
+├── maj_securite.sh              # Mise à jour automatique des paquets système
+
 ```
+
 ### Système
 - **Kali Linux** : Ce projet est conçu pour fonctionner sur Kali Linux, une distribution spécialisée dans les tests de sécurité.
 - Outils nécessaires:
