@@ -2,8 +2,6 @@
 
 Ce projet a pour objectif de créer une série de scripts en **Python** et **Bash** afin d'automatiser certaines tâches de sécurité sur un système Linux. Il inclut des outils pour la surveillance des fichiers sensibles, la gestion des mots de passe, la détection d'intrusions, et l'automatisation des mises à jour de sécurité.
 
-
-
 ## Description
 
 Ce projet implémente une série de scripts en **Python** et **Bash** visant à améliorer la sécurité d'un système informatique à travers diverses tâches d'analyse, de surveillance et de gestion. Les principales fonctionnalités incluent la surveillance des fichiers sensibles, la gestion des mots de passe, la détection des ports ouverts et des services vulnérables, ainsi que l'automatisation de la gestion des utilisateurs.
@@ -116,9 +114,9 @@ Pour installer les dépendances nécessaires à Python, suivez les étapes ci-de
    sudo apt install inotify-tools
    ```
 
-Créez un mot de passe d'application pour l'envoi d'e-mails (selon votre configuration de messagerie, cela peut être nécessaire).
+Créez un mot de passe d'application pour l'envoi d'e-mails.
 
-Installez Python 3.13 et créez un environnement virtuel:   
+Installez Python et créez un environnement virtuel:   
 ```bash
 sudo apt install python3.13-venv
 python3 -m venv venv
@@ -133,7 +131,6 @@ pip install -r requirements.txt
 pour utiliser un fichier .env avec python-dotenv
 ```bash
 pip install python-dotenv
-
 ```
 
 Contenu du fichier .venv
@@ -142,18 +139,15 @@ LOG_FILE=/home/sylvie/Projet_scripting_securise_sylvie/hash_changes.log
 JSON_FILE=/home/sylvie/Projet_scripting_securise_sylvie/alerts.json
 SQLITE_DB=/var/log/alerts.db
 
-# config.py
-
-ADMIN_EMAIL = "admin@example.com"
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
-SMTP_USER = "ton.email@gmail.com"
-SMTP_PASSWORD = "mot_de_passe_application"
-
+ADMIN_EMAIL=e.mail Admin
+SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=e.mail User
+SMTP_PASSWORD="mot de passe_application"
 ```
 
 
-Créer un fichier wordlist pour Hydra, quelques mots de passe simples, pour les tests
+Créer un fichier wordlist pour Hydra, avec quelques mots de passe simples, pour les tests
 ```bash
 echo -e "password\n123456\nadmin\nroot\nsylvie" > /home/sylvie/smallwordlist.txt
 chmod 600 /home/sylvie/smallwordlist.txt
@@ -171,14 +165,14 @@ ls -l /usr/share/wordlists/rockyou.txt
 
 Avant de commencer l'exécution des scripts, veuillez suivre ces étapes importantes:
 
-Avant de lancer les scripts, il est essentiel de personnaliser certains paramètres spécifiques à votre environnement. Modifiez les fichiers suivants pour adapter les informations à votre système:
+Avant de lancer les scripts, il est essentiel de personnaliser certains paramètres spécifiques à votre environnement:
 
 - **Chemin des fichiers** : Assurez-vous que les chemins des fichiers référencés dans les scripts sont corrects. Par exemple, les fichiers de log, les répertoires de sauvegarde, etc.
 - **Adresse e-mail** : Si des alertes par e-mail doivent être envoyées, vous devrez configurer votre adresse e-mail dans les scripts.
 - **Adresse IP** : Vérifiez que l'adresse IP du système cible ou du réseau est correctement définie dans les fichiers de configuration si nécessaire.
 
 ### 2. **Permissions des fichiers**
-Certains scripts nécessitent des permissions spécifiques pour pouvoir s'exécuter correctement, en particulier les scripts Bash qui interagissent avec des fichiers systèmes ou des fichiers de log. Pour garantir leur bon fonctionnement, vous devez attribuer les permissions nécessaires à chaque fichier Bash:
+Certains scripts nécessitent des permissions spécifiques pour pouvoir s'exécuter correctement, en particulier les scripts Bash qui interagissent avec des fichiers systèmes ou des fichiers de log. 
 ```bash
 sudo chmod +x /chemin/vers/votre/nom_du_scrip.sh
 ```
@@ -193,15 +187,14 @@ python3 /chemin/vers/votre/nom_du_script.py
 
 ## main.py
 
-- **Rôle principal** : Point d'entrée général de ton projet.
+- **Rôle principal** : Point d'entrée général du projet.
 - **Fonctions clés** :  
-  - Exécution de tâches automatisées : gestion des utilisateurs, contrôle des mots de passe, scan de ports réseau.  
-  - Lancement des scripts Bash (ex : `scan_ports.sh`) pour scanner la cible réseau.  
+  - Exécution de tâches automatisées : gestion des utilisateurs, contrôle des mots de passe, scan de ports réseau.    
   - Récupération des résultats et traitement des retours (ex : analyse des scans, gestion des erreurs).  
   - Orchestration globale des sous-tâches du projet.
 
 - **Usage** :  
-  - À lancer pour démarrer l’ensemble des opérations principales de ton projet de sécurité.  
+  - À lancer pour démarrer l’ensemble des opérations principales du projet de sécurité.  
   - Script global qui englobe plusieurs sous-tâches.
 
 ---
@@ -221,15 +214,50 @@ python3 /chemin/vers/votre/nom_du_script.py
 
 ---
 
-## Résumé comparatif
-
-| Script                  | Fonction                                      | Quand l’utiliser                       |
-|-------------------------|-----------------------------------------------|-------------------------------------|
-| **main.py**             | Orchestration générale : gestion, scans, etc. | Pour lancer le projet globalement   |
-| **analyse_surveillance.py** | Analyse approfondie des logs et alertes        | Pour analyser les événements et générer des rapports |
-
----
-
 Après execution du fichier: analyse-surveillance.py
 
 les événement détecté  sont dans le fichier hash_changes.log.
+
+## automatisation avec cron
+
+fichier crontab
+```bash
+crontab -e
+```
+Fichier Bash tous les jours à 2h du matin, exemple:
+```bash
+0 2 * * * /bin/bash /home/sylvie/Projet_scripting_securise_sylvie/surveillance.sh
+```
+
+Fichier ptyhon tous les jours à 8h30 du matin, exemple:
+```bash
+30 8 * * * /usr/bin/python3 /home/sylvie/Projet_scripting_securise_sylvie/analyse-surveillance.py
+```
+## Mise en service automatique de la surveillance
+Pour garantir une surveillance continue des fichiers sensibles dès le démarrage du système, intégré le script surveillance.sh  comme service systemd.
+
+fichier de configuration /etc/systemd/system/surveillance_fichiers.service
+
+```bash=
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/home/sylvie/Projet_scripting_securise_sylvie
+ExecStart=/bin/bash /home/sylvie/Projet_scripting_securise_sylvie/surveillance.sh
+Restart=always
+RestartSec=5
+EnvironmentFile=/home/sylvie/Projet_scripting_securise_sylvie/.env
+StandardOutput=journal
+StandardError=journal
+KillMode=process
+```
+
+Enregistrement et activation du service: 
+
+```bash=
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable surveillance_fichiers.service
+sudo systemctl start surveillance_fichiers.service
+```
